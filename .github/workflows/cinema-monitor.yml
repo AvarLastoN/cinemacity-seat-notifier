@@ -11,7 +11,7 @@ jobs:
 
     env:
       CINEMA_ID: "1052"
-      MOVIE_NAME: "The Odyssey"
+      MOVIE_NAME: "All IMAX films"
       AUDITORIUM_NAME: "IMAX"
       TARGET_DATES: '["2026-10-02", "2026-10-03"]'
       ALLOWED_SHOWTIMES: "{}"
@@ -30,6 +30,14 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Restore cinema state
+        uses: actions/cache@v4
+        with:
+          path: cinema_state.json
+          key: cinema-state-${{ github.run_id }}
+          restore-keys: |
+            cinema-state-
 
       - name: Run Cinema City monitor
         run: python -c "import function_app; function_app.imax_ticket_monitor(None)"
