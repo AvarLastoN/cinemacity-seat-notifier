@@ -139,7 +139,6 @@ def send_telegram_message(
         payload = json.dumps({
             "chat_id": chat_id,
             "text": message,
-            "parse_mode": "Markdown",
             "disable_web_page_preview": True
         }).encode("utf-8")
 
@@ -489,8 +488,7 @@ def imax_ticket_monitor(
             ):
 
                 message_parts.append(
-                    f"🕐 *{ev['time']}* – "
-                    f"[🎟️ Koupit]({ev['launch_link']})"
+                f"🕐 {ev['time']}"
                 )
 
             message_parts.append("")
