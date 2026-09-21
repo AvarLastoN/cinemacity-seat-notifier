@@ -163,6 +163,13 @@ def send_telegram_message(
             )
             return False
 
+      except urllib.error.HTTPError as e:
+        error_body = e.read().decode("utf-8", errors="replace")
+        logging.error(
+            f"Telegram HTTP error {e.code}: {error_body}"
+        )
+        return False
+
     except Exception as e:
         logging.error(
             f"Failed to send Telegram notification: {e}"
