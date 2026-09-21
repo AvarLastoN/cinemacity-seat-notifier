@@ -1,0 +1,35 @@
+name: Cinema City Monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    env:
+      CINEMA_ID: "1052"
+      MOVIE_NAME: "The Odyssey"
+      AUDITORIUM_NAME: "IMAX"
+      TARGET_DATES: '["2026-10-02", "2026-10-03"]'
+      ALLOWED_SHOWTIMES: "{}"
+      RATIO_THRESHOLD: "0.016"
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Cinema City monitor
+        run: python -c "import function_app; function_app.imax_ticket_monitor(None)"
