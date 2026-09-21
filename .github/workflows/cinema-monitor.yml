@@ -13,7 +13,7 @@ jobs:
       CINEMA_ID: "1052"
       MOVIE_NAME: "All IMAX films"
       AUDITORIUM_NAME: "IMAX"
-      TARGET_DATES: '["2026-10-02", "2026-10-03"]'
+      TARGET_DATES: '["2026-09-25", "2026-09-26", "2026-09-27"]'
       ALLOWED_SHOWTIMES: "{}"
       RATIO_THRESHOLD: "0.016"
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
